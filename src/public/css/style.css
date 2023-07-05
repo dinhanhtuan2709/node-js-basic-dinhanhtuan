@@ -1,8 +1,44 @@
-h1{
-    color: red;
-    border: 1 solid green;
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
 }
-img{
-    width: 100%;
-    height: 100%;
+label{
+    display: block;
+}
+
+.topnav {
+    overflow: hidden;
+    background-color: #333;
+}
+
+.topnav a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.topnav a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+.topnav a.active {
+    background-color: #04AA6D;
+    color: white;
+}
+
+.create-account-contaner {
+    text-align: center;
+    padding: 10px;
+}
+.create-account-contaner b {
+    color: red;
+}
+.create-account-contaner button {
+    margin-top: 15px;
+    font: italic;
+    cursor: pointer;
 }
