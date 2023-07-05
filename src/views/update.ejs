@@ -1,0 +1,35 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UPDATE USER</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <form class="update-user-container" action="/update-user" method="post">
+        <div>
+            <label>NAME</label>
+            <input name="Name" value="<%= dataUser.Name %>" />
+        </div>
+        <div>
+            <label>EMAIL</label>
+            <input name="Email" value="<%= dataUser.Email %>" />
+        </div>
+        <div>
+            <label>PHONE NUMBER</label>
+            <input name="PhoneNumber" value="<%= dataUser.PhoneNumber %>" />
+        </div>
+        <div>
+            <label>ADDRESS</label>
+            <input name="Address" value="<%= dataUser.Address %>" />
+        </div>
+        <input type="text" value="<%= dataUser.Code %>", hidden name="Code">
+        <div>
+            <button class="btn-save" type="submit">SAVE</button>
+        </div>
+    </form>
+</body>
+
+</html>

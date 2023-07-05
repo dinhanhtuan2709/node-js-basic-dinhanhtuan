@@ -42,3 +42,15 @@ label{
     font: italic;
     cursor: pointer;
 }
+.update-user-container{
+    padding: 15px;
+}
+.update-user-container label{
+    display: block;
+}
+.btn-save{
+    margin-top: 15px;
+    margin-left: 50px;
+    cursor: pointer;
+    
+}

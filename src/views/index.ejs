@@ -47,13 +47,21 @@
                             <td>
                                 <%= dataUser[i].Address %>
                             </td>
-                            <td>
-                                <button type="button"><a href="/detail/user/<%= dataUser[i].Code %>"
-                                        target="_blank">Details</a></button>
-                                <button type="button"><a href="/delete/user/<%= dataUser[i].Code %>"
-                                        target="_blank">Delete</a></button>
-                                <button type="button"><a href="/update/user/<%= dataUser[i].Code %>"
-                                        target="_blank">Update</a></button>
+                            <td class="abc">
+                                <form action="/detail/user" method="get">
+                                    <button type="button"><a href="/detail/user/<%= dataUser[i].Code %>"
+                                            target="_blank">Details</a></button>
+                                </form>
+
+                                <form action="/delete/user" method="post">
+                                    <input type="text" hidden value="<%= dataUser[i].Code %>" name="codeUser" />
+                                    <button type="submit">Delete</button>
+                                </form>
+
+                                <form action="/update/user/<%= dataUser[i].Code %>" method="get">
+                                    <button type="submit">Update</button>
+                                </form>
+
                             </td>
                         </tr>
                         <% } %>

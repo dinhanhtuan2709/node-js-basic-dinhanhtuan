@@ -13,7 +13,7 @@ let getDetailPage = async (req, res) =>  {
     let UserCode = req.params.UserCode;
     let [user] = await pool.execute('select * from user where Code = ?', [UserCode])
 
-    return res.send(JSON.stringify(user[0]))
+    return res.send(JSON.stringify(user))
 }
 
 let createNewUser = async (req, res) =>  {
@@ -22,6 +22,27 @@ let createNewUser = async (req, res) =>  {
     return res.redirect('/')
 }
 
+let DeleteUser = async (req, res) =>  {
+    let codeUser = req.body.codeUser;
+    await pool.execute('delete from user where Code = ?', [codeUser])
+    return res.redirect('/')
+}
+
+let UpdateUser = async (req, res) =>  { 
+    let code = req.params.code;
+    let [user] = await pool.execute('select * from user where Code = ?', [code]);
+    return res.render('update.ejs', {dataUser: user[0]});
+}
+let getUpdate = async (req,res) =>{
+    let Code = req.body.Code;
+    let Name = req.body.Name;
+    let Email = req.body.Email;
+    let PhoneNumber = req.body.PhoneNumber;
+    let Address = req.body.Address;
+     await pool.execute('update user set Name = ?, Email = ?, PhoneNumber = ?, Address = ? where Code = ?', [Name, Email, PhoneNumber, Address,Code])
+     return res.redirect('/')
+}
+
 module.exports = {
-    getHomePage, getDetailPage, createNewUser
+    getHomePage, getDetailPage, createNewUser, DeleteUser, UpdateUser, getUpdate
 }
