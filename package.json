@@ -19,10 +19,12 @@
   "homepage": "https://github.com/dinhanhtuan2709/node-js-basic-dinhanhtuan/#readme",
   "dependencies": {
     "@babel/node": "7.22.5",
+    "app-root-path": "3.0.0",
     "body-parser": "1.20.2",
     "dotenv": "10.0.0",
     "ejs": "3.1.6",
     "express": "4.17.1",
+    "multer": "1.4.3",
     "mysql2": "2.3.0",
     "nodemon": "2.0.22"
   },

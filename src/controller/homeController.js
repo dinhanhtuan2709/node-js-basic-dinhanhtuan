@@ -1,6 +1,7 @@
-import { name } from "ejs";
+// import { name } from "ejs";
 import pool from "../configs/connectDB";
-import { emit } from "nodemon";
+// import { emit } from "nodemon";
+import multer from "multer";
 
 let getHomePage = async (req, res) =>  {
 
@@ -34,15 +35,38 @@ let UpdateUser = async (req, res) =>  {
     return res.render('update.ejs', {dataUser: user[0]});
 }
 let getUpdate = async (req,res) =>{
-    let Code = req.body.Code;
-    let Name = req.body.Name;
-    let Email = req.body.Email;
-    let PhoneNumber = req.body.PhoneNumber;
-    let Address = req.body.Address;
+    let {Code,Name,Email,PhoneNumber,Address} = req.body;
      await pool.execute('update user set Name = ?, Email = ?, PhoneNumber = ?, Address = ? where Code = ?', [Name, Email, PhoneNumber, Address,Code])
      return res.redirect('/')
 }
 
+let getUploadFilePage = async(req,res) =>{
+    return res.render('uploadfile.ejs')
+}
+
+const upload = multer().single('profile_pic');
+
+let handleUploadFiles = async(req,res) => {
+    upload(req, res, function(err) {
+
+        if (req.fileValidationError) {
+            return res.send(req.fileValidationError);
+        }
+        else if (!req.file) {
+            return res.send('Please select an image to upload');
+        }
+        else if (err instanceof multer.MulterError) {
+            return res.send(err);
+        }
+        else if (err) {
+            return res.send(err);
+        }
+
+        // Display uploaded image for user validation
+        res.send(`You have uploaded this image: <hr/><img src="/image/${req.file.filename}" width="500"><hr /><a href="/upload-file">Upload another image</a>`);
+    });
+}
+
 module.exports = {
-    getHomePage, getDetailPage, createNewUser, DeleteUser, UpdateUser, getUpdate
+    getHomePage, getDetailPage, createNewUser, DeleteUser, UpdateUser, getUpdate, getUploadFilePage, handleUploadFiles
 }
