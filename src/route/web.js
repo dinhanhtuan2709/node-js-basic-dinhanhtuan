@@ -2,6 +2,7 @@ import express from "express";
 import homeController from '../controller/homeController';
 import multer from "multer";
 import path from 'path';
+import { error } from "console";
 var appRoot = require('app-root-path');
 let router = express.Router();
 
@@ -27,6 +28,8 @@ const imageFilter = function(req, file, cb) {
 
 let upload = multer({storage: storage, fileFilter: imageFilter});
 
+let uploadMultiple = multer({storage: storage, fileFilter: imageFilter}).array('multiple_images',10);
+
 const initWebRouter = (app) => {
     router.get('/', homeController.getHomePage);
     router.get('/detail/user/:UserCode',homeController.getDetailPage)
@@ -36,8 +39,21 @@ const initWebRouter = (app) => {
     router.post('/update-user',homeController.getUpdate)
 
     router.get('/upload-file', homeController.getUploadFilePage);
-    router.post('/upload-single-image',upload.single('profile_pic'), homeController.handleUploadFiles);
-
+    router.post('/upload-single-image',upload.single('profile_pic'), homeController.handleUploadFile);
+    router.post('/upload-multiple-images', (req,res,next) => {
+        uploadMultiple(req,res,(err) => {
+            if (err instanceof multer.MulterError && err.code === 'LIMIT FILES') {
+                res.send('LIMIT FILES');
+            }
+            else if (err) {
+                res.send(err);
+            }
+            else
+            {
+                next();
+            }
+        })
+    }, homeController.handleUploadMultipleFiles);
 
     router.get('/about', (req, res) => {
       res.send('Rat vui khi duoc lam quen. ')

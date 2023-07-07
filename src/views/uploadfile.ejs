@@ -13,24 +13,30 @@
         <a href="/">Home</a>
         <a class="active" href="/upload-file">Upload Files</a>
     </div>
+
     <div class="upload-file-container">
+        <h1><b style="color: red;">Handling files upload with Express.js and Multer</b></h1>
         <form method="POST" action="/upload-single-image" enctype="multipart/form-data">
             <div>
-                <label ><b style="color: red;">Avatar</b></label>
-                <input type="file" name="profile_pic"/>
+                <h3 style="color: rgb(5, 255, 126);"><b>Select single image: </b></h3>
+                <span>Upload your profile picture </span>
+                <input type="file" name="profile_pic" />
             </div>
             <div>
                 <button type="submit">Save</button>
             </div>
         </form>
 
+        <hr style="border: 0; border-top: 3px solid rgb(0, 255, 162); margin: 15px;" />
+
         <form method="POST" action="/upload-multiple-images" enctype="multipart/form-data">
             <div>
-                <label>Select multiple images:</label>
+                <h3 style="color:rgb(5, 255, 126);"><b>Select multiple images:</b></h3>
+                <span>Upload your profile picture </span>
                 <input type="file" name="multiple_images" multiple />
             </div>
             <div>
-                <input type="submit" name="btn_upload_multiple_images" value="Upload" />
+                <button type="submit" name="btn_upload_multiple_images">Save Multiple</button>
             </div>
         </form>
     </div>
